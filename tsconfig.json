@@ -3,6 +3,7 @@
         "outDir": "./dist",
         "module": "CommonJS",
         "target": "ES2019",
-        "allowJs": true
+        "allowJs": true,
+        "strictNullChecks": true
     }
 }
