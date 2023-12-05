@@ -1,36 +1,50 @@
-import { Dollar } from './dollar'
-import { Euro } from './euro'
+import { type Dollar, type Euro, Money } from './money'
 
 describe('Money', () => {
   it('should return 10 when five dollars are multiplied by 2 and 15 when is multiplied by 3', () => {
-    const five: Dollar = new Dollar(5)
+    const five: Dollar = Money.dollar(5)
 
-    expect(five.times(2).equals(new Dollar(10))).toBeTruthy()
+    expect(five.times(2).equals(Money.dollar(10))).toBeTruthy()
 
-    expect(five.times(3).equals(new Dollar(15))).toBeTruthy()
+    expect(five.times(3).equals(Money.dollar(15))).toBeTruthy()
   })
 
   it('should return true if dollars has the same value', () => {
-    expect(new Dollar(5).equals(new Dollar(5))).toBeTruthy()
+    expect(Money.dollar(5).equals(Money.dollar(5))).toBeTruthy()
   })
 
   it('should return false dollar has differents values', () => {
-    expect(new Dollar(5).equals(new Dollar(6))).toBeFalsy()
+    expect(Money.dollar(5).equals(Money.dollar(6))).toBeFalsy()
   })
 
   it('should return 10 when five Euros are multiplied by 2 and 15 when is multiplied by 3', () => {
-    const five: Euro = new Euro(5)
+    const five: Euro = Money.euro(5)
 
-    expect(five.times(2).equals(new Euro(10))).toBeTruthy()
+    expect(five.times(2).equals(Money.euro(10))).toBeTruthy()
 
-    expect(five.times(3).equals(new Euro(15))).toBeTruthy()
+    expect(five.times(3).equals(Money.euro(15))).toBeTruthy()
   })
 
   it('should return true if Euros has the same value', () => {
-    expect(new Euro(5).equals(new Euro(5))).toBeTruthy()
+    expect(Money.euro(5).equals(Money.euro(5))).toBeTruthy()
   })
 
   it('should return false Euro has differents values', () => {
-    expect(new Euro(5).equals(new Euro(6))).toBeFalsy()
+    expect(Money.euro(5).equals(Money.euro(6))).toBeFalsy()
+  })
+
+  it('should return true when money equalty is correct', () => {
+    const randomMoneyQuantity = Math.abs(Math.random())
+    expect(Money.euro(randomMoneyQuantity).equals(Money.euro(randomMoneyQuantity))).toBeTruthy()
+    expect(Money.dollar(randomMoneyQuantity).equals(Money.dollar(randomMoneyQuantity))).toBeTruthy()
+  })
+
+  it('should return true when money equalty is invalid', () => {
+    const randomMoneyQuantity = Math.abs(Math.random())
+    const offset = 30
+
+    expect(Money.euro(randomMoneyQuantity).equals(Money.euro(randomMoneyQuantity + offset))).toBeFalsy()
+    expect(Money.dollar(randomMoneyQuantity).equals(Money.dollar(randomMoneyQuantity + offset))).toBeFalsy()
+    expect(Money.dollar(randomMoneyQuantity).equals(Money.euro(randomMoneyQuantity))).toBeFalsy()
   })
 })
