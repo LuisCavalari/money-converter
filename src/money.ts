@@ -1,5 +1,11 @@
 export abstract class Money {
   public amount: number
+  public currency: string
+
+  constructor (amount: number, currency: string) {
+    this.amount = amount
+    this.currency = currency
+  }
 
   equals (money: Money): boolean {
     if (this.constructor !== money.constructor) {
@@ -10,34 +16,28 @@ export abstract class Money {
   }
 
   static dollar (quantity: number): Dollar {
-    return new Dollar(quantity)
+    return new Dollar(quantity, 'USD')
   }
 
   static euro (quantity: number): Euro {
-    return new Euro(quantity)
+    return new Euro(quantity, 'EUR')
+  }
+
+  getCurrency (): string {
+    return this.currency
   }
 
   abstract times (multiplier: number): Money
 }
 
 export class Euro extends Money {
-  constructor (amount: number) {
-    super()
-    this.amount = amount
-  }
-
   times (multiplier: number): Euro {
-    return new Euro(this.amount * multiplier)
+    return Money.euro(this.amount * multiplier)
   }
 }
 
 export class Dollar extends Money {
-  constructor (amount: number) {
-    super()
-    this.amount = amount
-  }
-
   times (multiplier: number): Dollar {
-    return new Dollar(this.amount * multiplier)
+    return Money.dollar(this.amount * multiplier)
   }
 }
