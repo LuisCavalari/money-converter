@@ -47,4 +47,13 @@ describe('Money', () => {
     expect(Money.dollar(randomMoneyQuantity).equals(Money.dollar(randomMoneyQuantity + offset))).toBeFalsy()
     expect(Money.dollar(randomMoneyQuantity).equals(Money.euro(randomMoneyQuantity))).toBeFalsy()
   })
+
+  it('should correctly handle currencies', () => {
+    expect(Money.dollar(5).getCurrency()).toEqual('USD')
+  })
+
+  it('should correctly handle currencies', () => {
+    expect(Money.dollar(5).getCurrency()).toEqual('USD')
+    expect(Money.euro(5).getCurrency()).toEqual('EUR')
+  })
 })
