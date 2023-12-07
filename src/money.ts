@@ -1,4 +1,4 @@
-export abstract class Money {
+export class Money {
   public amount: number
   public currency: string
 
@@ -8,7 +8,7 @@ export abstract class Money {
   }
 
   equals (money: Money): boolean {
-    if (this.constructor !== money.constructor) {
+    if (this.currency !== money.getCurrency()) {
       return false
     }
 
@@ -27,17 +27,19 @@ export abstract class Money {
     return this.currency
   }
 
-  abstract times (multiplier: number): Money
+  times (multiplier: number): Money {
+    return new Money(this.amount * multiplier, this.getCurrency())
+  }
 }
 
 export class Euro extends Money {
   times (multiplier: number): Euro {
-    return Money.euro(this.amount * multiplier)
+    return new Money(this.amount * multiplier, this.getCurrency())
   }
 }
 
 export class Dollar extends Money {
   times (multiplier: number): Dollar {
-    return Money.dollar(this.amount * multiplier)
+    return new Money(this.amount * multiplier, this.getCurrency())
   }
 }
