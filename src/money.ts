@@ -15,12 +15,12 @@ export class Money {
     return money.amount === this.amount
   }
 
-  static dollar (quantity: number): Dollar {
-    return new Dollar(quantity, 'USD')
+  static dollar (quantity: number): Money {
+    return new Money(quantity, 'USD')
   }
 
-  static euro (quantity: number): Euro {
-    return new Euro(quantity, 'EUR')
+  static euro (quantity: number): Money {
+    return new Money(quantity, 'EUR')
   }
 
   getCurrency (): string {
@@ -28,18 +28,6 @@ export class Money {
   }
 
   times (multiplier: number): Money {
-    return new Money(this.amount * multiplier, this.getCurrency())
-  }
-}
-
-export class Euro extends Money {
-  times (multiplier: number): Euro {
-    return new Money(this.amount * multiplier, this.getCurrency())
-  }
-}
-
-export class Dollar extends Money {
-  times (multiplier: number): Dollar {
     return new Money(this.amount * multiplier, this.getCurrency())
   }
 }
