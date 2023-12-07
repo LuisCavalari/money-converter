@@ -56,4 +56,8 @@ describe('Money', () => {
     expect(Money.dollar(5).getCurrency()).toEqual('USD')
     expect(Money.euro(5).getCurrency()).toEqual('EUR')
   })
+
+  it('should return false when distincts currencies are compared with same value', () => {
+    expect(Money.dollar(5).equals(Money.euro(5))).toBeFalsy()
+  })
 })
