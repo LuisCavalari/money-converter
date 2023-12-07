@@ -1,8 +1,8 @@
-import { type Dollar, type Euro, Money } from './money'
+import { Money } from './money'
 
 describe('Money', () => {
   it('should return 10 when five dollars are multiplied by 2 and 15 when is multiplied by 3', () => {
-    const five: Dollar = Money.dollar(5)
+    const five: Money = Money.dollar(5)
 
     expect(five.times(2).equals(Money.dollar(10))).toBeTruthy()
 
@@ -15,22 +15,6 @@ describe('Money', () => {
 
   it('should return false dollar has differents values', () => {
     expect(Money.dollar(5).equals(Money.dollar(6))).toBeFalsy()
-  })
-
-  it('should return 10 when five Euros are multiplied by 2 and 15 when is multiplied by 3', () => {
-    const five: Euro = Money.euro(5)
-
-    expect(five.times(2).equals(Money.euro(10))).toBeTruthy()
-
-    expect(five.times(3).equals(Money.euro(15))).toBeTruthy()
-  })
-
-  it('should return true if Euros has the same value', () => {
-    expect(Money.euro(5).equals(Money.euro(5))).toBeTruthy()
-  })
-
-  it('should return false Euro has differents values', () => {
-    expect(Money.euro(5).equals(Money.euro(6))).toBeFalsy()
   })
 
   it('should return true when money equalty is correct', () => {
