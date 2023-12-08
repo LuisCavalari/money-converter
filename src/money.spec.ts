@@ -1,3 +1,4 @@
+import { Expression } from './expression'
 import { Money } from './money'
 
 describe('Money', () => {
@@ -43,5 +44,9 @@ describe('Money', () => {
 
   it('should return false when distincts currencies are compared with same value', () => {
     expect(Money.dollar(5).equals(Money.euro(5))).toBeFalsy()
+  })
+
+  it('should sum two dollars amount', () => {
+    const sum: Expression = Money.dollar(5).add(Money.dollar(5))
   })
 })
