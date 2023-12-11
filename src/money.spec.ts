@@ -1,5 +1,7 @@
-import { Expression } from './expression'
+import { Bank } from './bank'
+import { type Expression } from './expression'
 import { Money } from './money'
+import { Sum } from './sum'
 
 describe('Money', () => {
   it('should return 10 when five dollars are multiplied by 2 and 15 when is multiplied by 3', () => {
@@ -47,6 +49,23 @@ describe('Money', () => {
   })
 
   it('should sum two dollars amount', () => {
-    const sum: Expression = Money.dollar(5).add(Money.dollar(5))
+    const five: Money = Money.dollar(5)
+    const result: Expression = five.add(five)
+    const sum = result as Sum
+    expect(sum.augend).toEqual(five)
+    expect(sum.addend).toEqual(five)
+  })
+
+  it('should reduce a sum', () => {
+    const sum: Expression = new Sum(Money.dollar(3), Money.dollar(4))
+    const bank = new Bank()
+    const result = bank.reduce(sum, 'USD')
+    expect(result).toEqual(Money.dollar(7))
+  })
+
+  it('should reduce a money', () => {
+    const bank = new Bank()
+    const result = bank.reduce(Money.dollar(7), 'USD')
+    expect(result).toEqual(Money.dollar(7))
   })
 })
