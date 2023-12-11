@@ -1,8 +1,10 @@
+import { type Money } from './money'
+import { type Sum } from './sum'
 import { type Expression } from './expression'
-import { Money } from './money'
 
 export class Bank {
   reduce (source: Expression, to: string): Money {
-    return Money.dollar(10)
+    const sum: Sum = source as Sum
+    return sum.reduce(to)
   }
 }

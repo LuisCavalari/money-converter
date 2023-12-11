@@ -1,3 +1,5 @@
-export interface Expression {
+import { type Money } from './money'
 
+export interface Expression {
+  reduce: (to: string) => Money
 }
