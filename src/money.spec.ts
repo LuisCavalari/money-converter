@@ -68,4 +68,16 @@ describe('Money', () => {
     const result = bank.reduce(Money.dollar(7), 'USD')
     expect(result).toEqual(Money.dollar(7))
   })
+
+  it('should reduce from different currencies', () => {
+    const bank = new Bank()
+    bank.addRate('EUR', 'USD', 2)
+
+    const result = bank.reduce(Money.euro(2), 'USD')
+    expect(result).toEqual(Money.dollar(1))
+  })
+
+  it('should handle idenity rate', () => {
+    expect(new Bank().getRate('USD', 'USD')).toEqual(1)
+  })
 })
